@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,9 +48,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class TalkFragment extends Fragment {
+public class TalkFragment extends Fragment implements ViewPager.OnPageChangeListener{
     private View view;
     private Context context;
+
+    private int currentPosition = 0;
+    private int direction = 1;
+    private Handler handler;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     OkHttpClient client = new OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS).build();
     // RecyclerView와 어댑터 객체 생성
@@ -70,23 +75,48 @@ public class TalkFragment extends Fragment {
         indicator = view.findViewById(R.id.indicator);
 
 
-        itemList.add(new Item(R.drawable.woman1, "선희"));
-        itemList.add(new Item(R.drawable.man1, "민준"));
-        itemList.add(new Item(R.drawable.man2, "봉진"));
-        itemList.add(new Item(R.drawable.man3, "국민"));
-        itemList.add(new Item(R.drawable.woman2, "지민"));
-        itemList.add(new Item(R.drawable.girl, "서현"));
-        itemList.add(new Item(R.drawable.woman3, "숨복"));
-        itemList.add(new Item(R.drawable.woman4, "유진"));
+        itemList.add(new Item(R.drawable.woman1, "김선희(여)","저는 대한민국 대구광역시에\n사는 32세 여성입니다"));
+        itemList.add(new Item(R.drawable.man1, "최민준(남)","저는 대한민국 부산광역시에\n사는 31세 남성입니다"));
+        itemList.add(new Item(R.drawable.man2, "정봉진(남)","저는 대한민국 세종특별자치시에\n사는 43세 남성입니다"));
+        itemList.add(new Item(R.drawable.man3, "조국민(남)","저는 대한민국 대전광역시에 사는\n27세 남성입니다"));
+        itemList.add(new Item(R.drawable.woman2, "신지민(여)","저는 대한민국 서울특별시에 사는\n51세 여성입니다"));
+        itemList.add(new Item(R.drawable.girl, "이서현(여)","저는 대한민국 대구광역시에 사는\n8세 여자아이입니다"));
+        itemList.add(new Item(R.drawable.woman3, "최숨복(여)","저는 대한민국 광주광역시에 사는\n82세 여성입니다"));
+        itemList.add(new Item(R.drawable.woman4, "안유진(여)","저는 대한민국 제주도에 사는\n19세 여성입니다"));
 
         adapter = new MyAdapter(itemList);
         viewPager.setAdapter(adapter);
         indicator.setViewPager(viewPager);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                currentPosition = position;
+            }
+        });
         view.findViewById(R.id.temp_btn).setOnClickListener(view1 -> {
             startRecognition();
         });
 
+
         return view;
+    }
+
+    // viewpager callback methods
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int Position) {
+        currentPosition = Position;
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     void callAPI(String question){
@@ -105,7 +135,7 @@ public class TalkFragment extends Fragment {
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization","Bearer" + BuildConfig.OPENAI_KEY)
+                .header("Authorization","Bearer " + BuildConfig.OPENAI_KEY)
                 .post(body)
                 .build();
 
@@ -127,7 +157,7 @@ public class TalkFragment extends Fragment {
                         jsonObject = new JSONObject(response.body().string());
                         JSONArray jsonArray = jsonObject.getJSONArray("choices");
                         String result = jsonArray.getJSONObject(0).getString("text");
-                        startSynthesis(result.trim());
+                        startSynthesis(result.trim(), currentPosition);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (ExecutionException e) {
@@ -150,7 +180,7 @@ public class TalkFragment extends Fragment {
         String question = "";
 
         // speech config listener
-        SpeechConfig speechConfig = SpeechConfig.fromSubscription(  BuildConfig.SPEECH_KEY, "koreacentral");
+        SpeechConfig speechConfig = SpeechConfig.fromSubscription(BuildConfig.SPEECH_KEY, "koreacentral");
         speechConfig.setSpeechRecognitionLanguage("ko-KR");
         AudioConfig audioConfig = AudioConfig.fromDefaultMicrophoneInput();
         SpeechRecognizer reco = new SpeechRecognizer(speechConfig, audioConfig);
@@ -176,11 +206,38 @@ public class TalkFragment extends Fragment {
     }
 
     // tts
-    public void startSynthesis(String resultText) throws ExecutionException, InterruptedException {
+    public void startSynthesis(String resultText, int position) throws ExecutionException, InterruptedException {
         String subscriptionRegion = "koreacentral";
+        SpeechConfig config = SpeechConfig.fromSubscription(BuildConfig.SPEECH_KEY, subscriptionRegion);
+        config.setSpeechSynthesisVoiceName("ko-KR-SunHiNeural");
+        Log.i("position", String.valueOf(position));
+        switch(position){
 
-        SpeechConfig config = SpeechConfig.fromSubscription(  BuildConfig.SPEECH_KEY, subscriptionRegion);
-        config.setSpeechSynthesisVoiceName("ko-KR-GookMinNeural");
+            case 0:
+                config.setSpeechSynthesisVoiceName("ko-KR-SunHiNeural");
+                break;
+            case 1:
+                config.setSpeechSynthesisVoiceName("ko-KR-InJoonNeural");
+                break;
+            case 2:
+                config.setSpeechSynthesisVoiceName("ko-KR-BongJinNeural");
+                break;
+            case 3:
+                config.setSpeechSynthesisVoiceName("ko-KR-GookMinNeural");
+                break;
+            case 4:
+                config.setSpeechSynthesisVoiceName("ko-KR-JiMinNeural");
+                break;
+            case 5:
+                config.setSpeechSynthesisVoiceName("ko-KR-SeoHyeonNeural");
+                break;
+            case 6:
+                config.setSpeechSynthesisVoiceName("ko-KR-SoonBokNeural");
+                break;
+            case 7:
+                config.setSpeechSynthesisVoiceName("ko-KR-YuJinNeural");
+                break;
+        }
 
         SpeechSynthesizer synthesizer = new SpeechSynthesizer(config);
         {

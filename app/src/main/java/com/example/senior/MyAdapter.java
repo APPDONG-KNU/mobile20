@@ -35,6 +35,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         Item item = itemList.get(position);
         holder.itemImage.setImageResource(item.getImageResId());
         holder.itemText.setText(item.getText());
+        holder.introText.setText(item.getText2());
     }
 
     @Override
@@ -46,15 +47,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         ImageView itemImage;
         TextView itemText;
+        TextView introText;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImage = itemView.findViewById(R.id.person_item_icon);
             itemText = itemView.findViewById(R.id.person_item_name);
-
+            introText = itemView.findViewById(R.id.person_intro);
         }
-
-
     }
 }
