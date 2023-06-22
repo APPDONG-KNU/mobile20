@@ -15,6 +15,10 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_community, container, false);
 
+        // connect azure sql database
+
+
+
         return view;
     }
 }

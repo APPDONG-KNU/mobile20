@@ -35,11 +35,6 @@ public class MainActivity extends AppCompatActivity {
         // fix light mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        // give permission to use microphone
-        if (checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{android.Manifest.permission.RECORD_AUDIO}, 1);
-        }
-
         changeFragment(R.id.main_fragment, communityFragment);
         navbar = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
         navbar.setOnItemSelectedListener(item -> {
@@ -61,6 +56,4 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(id, fragment);
         ft.commit();
     }
-
-
 }

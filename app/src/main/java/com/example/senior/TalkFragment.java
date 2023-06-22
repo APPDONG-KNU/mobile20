@@ -1,5 +1,7 @@
 package com.example.senior;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -35,12 +37,24 @@ import okhttp3.Response;
 
 public class TalkFragment extends Fragment {
     private View view;
+    private Context context;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     OkHttpClient client = new OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS).build();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_talk, container, false);
+        context = container.getContext();
+
+        // give permission to use microphone
+        if (getActivity().checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
+            getActivity().requestPermissions(new String[]{android.Manifest.permission.RECORD_AUDIO}, 1);
+
+        view.findViewById(R.id.temp_btn).setOnClickListener(view1 -> {
+//            startRecognition();
+            callAPI("안녕");
+        });
+
         return view;
     }
 
@@ -57,10 +71,10 @@ public class TalkFragment extends Fragment {
             e.printStackTrace();
         }
 
-        RequestBody body =RequestBody.create(jsonBody.toString(), JSON);
+        RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization","Bearer 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")
+                .header("Authorization","Bearer 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")
                 .post(body)
                 .build();
 
@@ -70,25 +84,25 @@ public class TalkFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Toast.makeText(getContext(),"Failed to load response due to "+ e.getMessage() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Failed to load response due to "+ e.getMessage() , Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if(response.isSuccessful()){
 
-                    JSONObject jsonObject =null;
+                    JSONObject jsonObject = null;
                     try {
                         jsonObject = new JSONObject(response.body().string());
                         JSONArray jsonArray = jsonObject.getJSONArray("choices");
                         String result = jsonArray.getJSONObject(0).getString("text");
-                        Toast.makeText(getContext(), result.trim(), Toast.LENGTH_SHORT).show();
-                    }catch (JSONException e){
+                        Toast.makeText(context, "살려줘", Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
                 else {
-                    Toast.makeText(getContext(), "Failed to load response due to " + response.body().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Failed to load response due to " + response.body().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -98,8 +112,8 @@ public class TalkFragment extends Fragment {
 
     // start recognition
     public void startRecognition() {
+        String question = "";
 
-        String question ="";
         // speech config listener
         SpeechConfig speechConfig = SpeechConfig.fromSubscription("84e519c9a7a243c9926aae596b677979", "koreacentral");
         speechConfig.setSpeechRecognitionLanguage("ko-KR");

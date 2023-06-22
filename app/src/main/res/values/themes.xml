@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TermProject" parent="Theme.AppCompat.Light">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#123456</item>
-        <item name="colorPrimaryVariant">#123456</item>
+        <item name="colorPrimary">#EA4545</item>
+        <item name="colorPrimaryVariant">#D16868</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#FF03DAC5</item>
@@ -14,7 +14,6 @@
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
 
     <style name="Theme.Senior" parent="Base.Theme.Senior" />
