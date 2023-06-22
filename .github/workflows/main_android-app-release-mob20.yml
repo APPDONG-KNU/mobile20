@@ -31,14 +31,11 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
         
-      - name: App Center
-        uses: wzieba/AppCenter-Github-Action@v1.3.3
+      - name: run any App Center CLI command
+        uses: joabalea/App-Center-action@v1.0.2
         with:
-          appName: wzieba/senior
+          command: appcenter distribute stores publish -s Beta -f app/build/outputs/apk/release/app-release-unsigned.apk -r releaseNote -a user/app
           token: 24cd6d2affd49505a61b21ce247917e8d344695f
-          file: app/build/outputs/apk/release/app-release-unsigned.apk
-          notifyTesters: true
-          debug: false
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
