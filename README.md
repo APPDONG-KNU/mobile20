@@ -28,7 +28,8 @@
 ### 사전 준비 사항
 Azure speech service key
 open ai key  
-<!--open ai key는 저희 팀 개인 키로 하드코딩 되어 있습니다.-->
+github actions 
+open ai key는 저희 팀 개인 키로 하드코딩 되어 있습니다.
 > **여러분의 제품/서비스를 Microsoft 애저 클라우드에 배포하기 위해 사전에 필요한 준비 사항들을 적어주세요.**
 
 ## 시작하기
