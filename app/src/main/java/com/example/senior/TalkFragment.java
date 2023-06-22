@@ -41,12 +41,12 @@ import okhttp3.Response;
 
 public class TalkFragment extends Fragment {
     private View view;
-    private Context context;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     OkHttpClient client = new OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS).build();
 
     // RecyclerView와 어댑터 객체 생성
     private RecyclerView recyclerView;
+    private Context context;
     private MyAdapter adapter;
     private List<Item> itemList = new ArrayList<>();
 
