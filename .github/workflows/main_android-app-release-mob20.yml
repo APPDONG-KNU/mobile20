@@ -35,7 +35,7 @@ jobs:
         uses: wzieba/AppCenter-Github-Action@v1
         with:
           appName: wzieba/Sample-App
-          token: "24cd6d2affd49505a61b21ce247917e8d344695f"
+          token: "8dfe85d59de1c05f5e4cfba009551c3671c3273d"
           file: app/build/outputs/apk/release/app-release-unsigned.apk
           notifyTesters: true
           debug: false
