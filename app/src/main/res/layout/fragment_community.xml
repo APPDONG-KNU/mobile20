@@ -10,7 +10,7 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="69dp"
-        android:gravity="center|left"
+        android:gravity="center"
         android:paddingStart="15dp"
         android:text="Silver Lounge"
         android:textColor="#FF0000"

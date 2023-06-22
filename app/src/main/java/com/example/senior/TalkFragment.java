@@ -74,7 +74,7 @@ public class TalkFragment extends Fragment implements ViewPager.OnPageChangeList
         viewPager = view.findViewById(R.id.viewPager);
         indicator = view.findViewById(R.id.indicator);
 
-
+        itemList = new ArrayList<>();
         itemList.add(new Item(R.drawable.woman1, "김선희(여)","저는 대한민국 대구광역시에\n사는 32세 여성입니다"));
         itemList.add(new Item(R.drawable.man1, "최민준(남)","저는 대한민국 부산광역시에\n사는 31세 남성입니다"));
         itemList.add(new Item(R.drawable.man2, "정봉진(남)","저는 대한민국 세종특별자치시에\n사는 43세 남성입니다"));
