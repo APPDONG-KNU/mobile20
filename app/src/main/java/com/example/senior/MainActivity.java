@@ -20,9 +20,6 @@ import com.microsoft.cognitiveservices.speech.audio.AudioConfig;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import com.microsoft.appcenter.AppCenter;
-import com.microsoft.appcenter.analytics.Analytics;
-import com.microsoft.appcenter.crashes.Crashes;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        AppCenter.start(getApplication(), "7126c0a6-c325-401f-a861-a1a0aa0cca02", Analytics.class, Crashes.class);
 
         // fix light mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
