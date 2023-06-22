@@ -105,7 +105,7 @@ public class TalkFragment extends Fragment {
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization","Bearer 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")
+                .header("Authorization","Bearer " + BuildConfig.OPENAI_KEY)
                 .post(body)
                 .build();
 
@@ -150,7 +150,7 @@ public class TalkFragment extends Fragment {
         String question = "";
 
         // speech config listener
-        SpeechConfig speechConfig = SpeechConfig.fromSubscription("84e519c9a7a243c9926aae596b677979", "koreacentral");
+        SpeechConfig speechConfig = SpeechConfig.fromSubscription(BuildConfig.SPEECH_KEY, "koreacentral");
         speechConfig.setSpeechRecognitionLanguage("ko-KR");
         AudioConfig audioConfig = AudioConfig.fromDefaultMicrophoneInput();
         SpeechRecognizer reco = new SpeechRecognizer(speechConfig, audioConfig);
@@ -179,7 +179,7 @@ public class TalkFragment extends Fragment {
     public void startSynthesis(String resultText) throws ExecutionException, InterruptedException {
         String subscriptionRegion = "koreacentral";
 
-        SpeechConfig config = SpeechConfig.fromSubscription("84e519c9a7a243c9926aae596b677979", subscriptionRegion);
+        SpeechConfig config = SpeechConfig.fromSubscription(BuildConfig.SPEECH_KEY, subscriptionRegion);
         config.setSpeechSynthesisVoiceName("ko-KR-GookMinNeural");
 
         SpeechSynthesizer synthesizer = new SpeechSynthesizer(config);
