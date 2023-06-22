@@ -112,6 +112,7 @@ public class TalkFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("TAG", "onFailure: " + e.getMessage());
                 Toast.makeText(context,"Failed to load response due to "+ e.getMessage() , Toast.LENGTH_SHORT).show();
             }
 
