@@ -5,7 +5,7 @@
 
 
 ## 제품명
-senior connect
+Senior Lounge
 
 ## 참가 동기
 프로젝트에 참여함으로서 협업 능력 함양
