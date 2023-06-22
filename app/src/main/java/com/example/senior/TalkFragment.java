@@ -60,7 +60,7 @@ public class TalkFragment extends Fragment {
         RequestBody body =RequestBody.create(jsonBody.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization","Bearer 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")
+                .header("Authorization","Bearer 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")
                 .post(body)
                 .build();
 
