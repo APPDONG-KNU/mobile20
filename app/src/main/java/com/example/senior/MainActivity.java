@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         changeFragment(R.id.main_fragment, communityFragment);
         navbar = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
         navbar.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
+            int itemId = item.getItemId ();
             if (itemId == R.id.community) {
                 changeFragment(R.id.main_fragment, communityFragment);
                 return true;
