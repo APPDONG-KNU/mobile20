@@ -7,6 +7,11 @@
         android:icon="@drawable/menu_community_item"
         android:title="커뮤니티"/>
     <item
+        android:id="@+id/messenger"
+        android:enabled="true"
+        android:icon="@drawable/menu_messenger_item"
+        android:title="대화"/>
+    <item
         android:id="@+id/talk"
         android:enabled="true"
         android:icon="@drawable/menu_talk_item"
