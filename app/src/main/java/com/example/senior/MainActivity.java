@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppCenter.start(getApplication(), "7126c0a6-c325-401f-a861-a1a0aa0cca02",
-                Analytics.class, Crashes.class);
+        AppCenter.start(getApplication(), "7126c0a6-c325-401f-a861-a1a0aa0cca02", Analytics.class, Crashes.class);
 
         // fix light mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
