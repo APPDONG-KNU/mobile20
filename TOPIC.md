@@ -16,6 +16,7 @@ senior connect
 
 ## 제품 아키텍처 (이미지)
 
+![아키텍처](https://github.com/hackersground-kr/mobile20/assets/126471230/339cb79e-d370-4a39-9d35-8e9558218077)
 
 ## 제품 소개 슬라이드
 
