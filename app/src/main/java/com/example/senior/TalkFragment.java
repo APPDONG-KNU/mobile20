@@ -80,8 +80,7 @@ public class TalkFragment extends Fragment {
             getActivity().requestPermissions(new String[]{android.Manifest.permission.RECORD_AUDIO}, 1);
 
         view.findViewById(R.id.temp_btn).setOnClickListener(view1 -> {
-//            startRecognition();
-            callAPI("안녕");
+            startRecognition();
         });
 
         return view;
