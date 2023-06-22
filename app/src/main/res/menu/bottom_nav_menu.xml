@@ -10,7 +10,7 @@
         android:id="@+id/messenger"
         android:enabled="true"
         android:icon="@drawable/menu_messenger_item"
-        android:title="대화"/>
+        android:title="메세지"/>
     <item
         android:id="@+id/talk"
         android:enabled="true"
