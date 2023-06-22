@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navbar;
     private Fragment communityFragment = new CommunityFragment();
     private Fragment talkFragment = new TalkFragment();
+    private Fragment MessengerFragment = new MessengerFragment();
 
     private Fragment messengerFragment = new MessengerFragment();
 
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             } else if(itemId==R.id.messenger){
                 changeFragment(R.id.main_fragment,messengerFragment);
+                return true;
+            }
+            else if (itemId == R.id.messenger) {
+                changeFragment(R.id.main_fragment, MessengerFragment);
                 return true;
             }
             return false;

@@ -6,29 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/top"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:gravity="center"
-        android:paddingStart="15dp"
-        android:text="Silver Lounge"
-        android:textColor="#FF0000"
-        android:textSize="36sp"
-        android:textStyle="bold" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#ff999999"
-        android:layout_below="@id/top" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/recycler_view"
         android:layout_above="@+id/bottom_layout"
-        android:layout_below="@+id/top" />
+        />
 
     <TextView
         android:id="@+id/welcome_text"
@@ -40,21 +23,21 @@
         android:textSize="28dp" />
 
     <RelativeLayout
-        android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:id="@+id/bottom_layout">
 
         <EditText
-            android:id="@+id/message_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/message_edit_text"
             android:layout_centerInParent="true"
-            android:layout_toLeftOf="@id/send_btn"
             android:hint="여기에 작성해주세요."
             android:padding="16dp"
-            android:background="@drawable/rounded_corner" />
+            android:layout_toLeftOf="@id/send_btn"
+            android:background="@drawable/rounded_corner"/>
 
         <ImageButton
             android:id="@+id/send_btn"
