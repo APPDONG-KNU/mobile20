@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +38,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import me.relex.circleindicator.CircleIndicator3;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -50,19 +53,22 @@ public class TalkFragment extends Fragment {
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     OkHttpClient client = new OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS).build();
     // RecyclerView와 어댑터 객체 생성
-    private RecyclerView recyclerView;
+    private ViewPager2 viewPager;
     private MyAdapter adapter;
+    private CircleIndicator3 indicator;
     private List<Item> itemList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_talk, container, false);
         context = container.getContext();
-        recyclerView = view.findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
 
-        itemList = new ArrayList<>();
+        // give permission to use microphone
+        if (getActivity().checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
+            getActivity().requestPermissions(new String[]{android.Manifest.permission.RECORD_AUDIO}, 1);
+        viewPager = view.findViewById(R.id.viewPager);
+        indicator = view.findViewById(R.id.indicator);
+
 
         itemList.add(new Item(R.drawable.woman1, "선희"));
         itemList.add(new Item(R.drawable.man1, "민준"));
@@ -73,15 +79,9 @@ public class TalkFragment extends Fragment {
         itemList.add(new Item(R.drawable.woman3, "숨복"));
         itemList.add(new Item(R.drawable.woman4, "유진"));
 
-
-
-
         adapter = new MyAdapter(itemList);
-        recyclerView.setAdapter(adapter);
-        // give permission to use microphone
-        if (getActivity().checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
-            getActivity().requestPermissions(new String[]{android.Manifest.permission.RECORD_AUDIO}, 1);
-
+        viewPager.setAdapter(adapter);
+        indicator.setViewPager(viewPager);
         view.findViewById(R.id.temp_btn).setOnClickListener(view1 -> {
             startRecognition();
         });
@@ -105,7 +105,7 @@ public class TalkFragment extends Fragment {
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization","Bearer " + BuildConfig.OPENAI_KEY)
+                .header("Authorization","Bearer" + BuildConfig.OPENAI_KEY)
                 .post(body)
                 .build();
 
@@ -150,7 +150,7 @@ public class TalkFragment extends Fragment {
         String question = "";
 
         // speech config listener
-        SpeechConfig speechConfig = SpeechConfig.fromSubscription(BuildConfig.SPEECH_KEY, "koreacentral");
+        SpeechConfig speechConfig = SpeechConfig.fromSubscription(  BuildConfig.SPEECH_KEY, "koreacentral");
         speechConfig.setSpeechRecognitionLanguage("ko-KR");
         AudioConfig audioConfig = AudioConfig.fromDefaultMicrophoneInput();
         SpeechRecognizer reco = new SpeechRecognizer(speechConfig, audioConfig);
@@ -179,7 +179,7 @@ public class TalkFragment extends Fragment {
     public void startSynthesis(String resultText) throws ExecutionException, InterruptedException {
         String subscriptionRegion = "koreacentral";
 
-        SpeechConfig config = SpeechConfig.fromSubscription(BuildConfig.SPEECH_KEY, subscriptionRegion);
+        SpeechConfig config = SpeechConfig.fromSubscription(  BuildConfig.SPEECH_KEY, subscriptionRegion);
         config.setSpeechSynthesisVoiceName("ko-KR-GookMinNeural");
 
         SpeechSynthesizer synthesizer = new SpeechSynthesizer(config);
