@@ -20,6 +20,8 @@ senior connect
 
 ## 제품 소개 슬라이드
 
+제품 소개 슬라이드 확인 -> [click!](decks/Tk_silver_lounge.pdf)
+
 
 ## 제품 소개 동영상
 
