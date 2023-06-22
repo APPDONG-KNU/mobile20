@@ -8,8 +8,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.List;
+
+import me.relex.circleindicator.CircleIndicator3;
+
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
@@ -43,10 +47,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         ImageView itemImage;
         TextView itemText;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImage = itemView.findViewById(R.id.person_item_icon);
             itemText = itemView.findViewById(R.id.person_item_name);
+
         }
+
+
     }
 }
