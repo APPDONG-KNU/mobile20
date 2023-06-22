@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private Fragment communityFragment = new CommunityFragment();
     private Fragment talkFragment = new TalkFragment();
 
+    private Fragment messengerFragment = new MessengerFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.talk) {
                 changeFragment(R.id.main_fragment, talkFragment);
+                return true;
+            } else if(itemId==R.id.messenger){
+                changeFragment(R.id.main_fragment,messengerFragment);
                 return true;
             }
             return false;
