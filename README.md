@@ -24,7 +24,7 @@
 ## 설치 방법
 1. 아래의 QR코드를 찍어 이동한다.
    
-![앱 설치 QR코드](https://github.com/hackersground-kr/mobile20/assets/76491242/1b817b53-7f43-459d-8362-81b22fef58ea)
+![앱 설치 QR](https://github.com/hackersground-kr/mobile20/assets/76491242/99eabb49-1927-47fb-bf93-ac7a07d47f07)
 
 2. `DOWNLOAD`버튼을 눌러 `.apk`파일을 설치한다.
 
