@@ -78,7 +78,7 @@ public class TalkFragment extends Fragment {
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization","Bearer "+BuildConfig.OPENAI_KEY)
+                .header("Authorization","Bearer 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")
                 .post(body)
                 .build();
 
@@ -88,7 +88,7 @@ public class TalkFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                // Toast.makeText(context,"Failed to load response due to "+ e.getMessage() , Toast.LENGTH_SHORT).show();
+                Log.d("callAPI", "Failed to load response due to "+ e.getMessage());
             }
 
             @Override
@@ -110,8 +110,7 @@ public class TalkFragment extends Fragment {
                     }
                 }
                 else {
-                    Log.d("test1111", "123");
-                    Toast.makeText(context, "Failed to load response due to " + response.body().toString(), Toast.LENGTH_SHORT).show();
+                    Log.d("callAPI", "Failed to load response due to " + response.body().string());
                 }
             }
         });
@@ -124,7 +123,7 @@ public class TalkFragment extends Fragment {
         String question = "";
 
         // speech config listener
-        SpeechConfig speechConfig = SpeechConfig.fromSubscription(BuildConfig.SPEECH_KEY, "koreacentral");
+        SpeechConfig speechConfig = SpeechConfig.fromSubscription("84e519c9a7a243c9926aae596b677979", "koreacentral");
         speechConfig.setSpeechRecognitionLanguage("ko-KR");
         AudioConfig audioConfig = AudioConfig.fromDefaultMicrophoneInput();
         SpeechRecognizer reco = new SpeechRecognizer(speechConfig, audioConfig);
@@ -153,7 +152,7 @@ public class TalkFragment extends Fragment {
     public void startSynthesis(String resultText) throws ExecutionException, InterruptedException {
         String subscriptionRegion = "koreacentral";
 
-        SpeechConfig config = SpeechConfig.fromSubscription(BuildConfig.SPEECH_KEY, subscriptionRegion);
+        SpeechConfig config = SpeechConfig.fromSubscription("84e519c9a7a243c9926aae596b677979", subscriptionRegion);
         config.setSpeechSynthesisVoiceName("ko-KR-GookMinNeural");
 
         SpeechSynthesizer synthesizer = new SpeechSynthesizer(config);
