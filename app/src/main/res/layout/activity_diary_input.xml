@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".community.PostActivity">
 
     <TextView
         android:id="@+id/top2"
@@ -14,40 +16,49 @@
         android:textColor="#FF0000"
         android:textSize="36sp"
         android:textStyle="bold" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ff999999" />
 
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="제목"
+        android:hint="제목을 입력하세요"
+        android:layout_margin="10dp"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/detailEditText"
         android:layout_width="match_parent"
-        android:layout_height="546dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:ems="10"
-        android:hint="내용"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="top|start"
+        android:hint="내용을 입력하세요"
         android:inputType="textPersonName" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="60dp"
         android:orientation="horizontal">
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="취소" />
 
         <Button
             android:id="@+id/uploadButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="게시" />
-
-        <Button
-            android:id="@+id/cancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="취소" />
     </LinearLayout>
 </LinearLayout>
