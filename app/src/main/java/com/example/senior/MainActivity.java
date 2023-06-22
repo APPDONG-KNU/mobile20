@@ -5,21 +5,13 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
+import com.example.senior.community.CommunityFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.microsoft.cognitiveservices.speech.SpeechConfig;
-import com.microsoft.cognitiveservices.speech.SpeechRecognitionResult;
-import com.microsoft.cognitiveservices.speech.SpeechRecognizer;
-import com.microsoft.cognitiveservices.speech.audio.AudioConfig;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
         // fix light mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        AppCenter.start(getApplication(), "bc13ebca-f95b-4d11-9048-7866024e5104", Analytics.class, Crashes.class);
 
         changeFragment(R.id.main_fragment, communityFragment);
         navbar = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
