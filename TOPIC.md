@@ -24,3 +24,23 @@ senior connect
 ## 제품 소개 동영상
 
 
+https://github.com/hackersground-kr/mobile20/assets/130948518/3762a9a0-c2b0-4a9c-bb8c-80346ee67adb
+
+
+https://github.com/hackersground-kr/mobile20/assets/130948518/f4ee8b92-04e7-4619-abbe-316aed2d423b
+
+
+
+https://github.com/hackersground-kr/mobile20/assets/130948518/7777587f-b318-4b5f-8d9d-995b53350d37
+
+
+
+https://github.com/hackersground-kr/mobile20/assets/130948518/1cc9f706-2943-4b4f-be4e-3fa4c7451a23
+
+
+
+https://github.com/hackersground-kr/mobile20/assets/130948518/e412d681-7e0b-4545-a18a-d8ee4fc10238
+
+
+
+
