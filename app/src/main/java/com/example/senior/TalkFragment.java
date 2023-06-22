@@ -3,16 +3,17 @@ package com.example.senior;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.microsoft.cognitiveservices.speech.SpeechConfig;
 import com.microsoft.cognitiveservices.speech.SpeechRecognitionResult;
@@ -60,14 +61,14 @@ public class TalkFragment extends Fragment {
 
         itemList = new ArrayList<>();
 
-        itemList.add(new Item(R.drawable.talk, "이름1"));
-        itemList.add(new Item(R.drawable.mike_image, "이름2"));
-        itemList.add(new Item(R.drawable.talk, "이름3"));
-        itemList.add(new Item(R.drawable.talk, "이름4"));
-        itemList.add(new Item(R.drawable.talk, "이름5"));
-        itemList.add(new Item(R.drawable.talk, "이름6"));
-        itemList.add(new Item(R.drawable.talk, "이름7"));
-        itemList.add(new Item(R.drawable.talk, "이름8"));
+        itemList.add(new Item(R.drawable.woman1, "선희"));
+        itemList.add(new Item(R.drawable.man1, "민준"));
+        itemList.add(new Item(R.drawable.man2, "봉진"));
+        itemList.add(new Item(R.drawable.man3, "국민"));
+        itemList.add(new Item(R.drawable.woman2, "지민"));
+        itemList.add(new Item(R.drawable.girl, "서현"));
+        itemList.add(new Item(R.drawable.woman3, "숨복"));
+        itemList.add(new Item(R.drawable.woman4, "유진"));
 
 
 
