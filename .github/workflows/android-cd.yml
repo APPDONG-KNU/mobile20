@@ -1,7 +1,7 @@
 name: Android CD
 on:
   pull_request:
-    branches: [ deploy-dev ]
+    branches: [ main ]
 
 jobs:
   deploy:
