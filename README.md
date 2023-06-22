@@ -38,7 +38,7 @@ github actions
 ## 시작하기
 1. 이 레포지토리를 포크합니다.
 2. 안드로이드 스튜디오에서 `File > New > Project From Version Control`을 클릭하여 포크한 레포지토리를 불러옵니다.
-3. `local.properties`에 해당 api 키를 입력한다.
+3. `local.properties`에 해당 api 키를 입력하고 try again 버튼을 누른다.
 ```
 speech_key = "자신의 Azure speech service key 입력"
 openAI_key = "자신의 open ai key 입력"
