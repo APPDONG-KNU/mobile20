@@ -15,14 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.microsoft.cognitiveservices.speech.CancellationReason;
-import com.microsoft.cognitiveservices.speech.ResultReason;
 import com.microsoft.cognitiveservices.speech.SpeechConfig;
 import com.microsoft.cognitiveservices.speech.SpeechRecognitionResult;
 import com.microsoft.cognitiveservices.speech.SpeechRecognizer;
-import com.microsoft.cognitiveservices.speech.SpeechSynthesisCancellationDetails;
-import com.microsoft.cognitiveservices.speech.SpeechSynthesisResult;
-import com.microsoft.cognitiveservices.speech.SpeechSynthesizer;
 import com.microsoft.cognitiveservices.speech.audio.AudioConfig;
 
 import org.json.JSONArray;
@@ -49,6 +44,7 @@ public class TalkFragment extends Fragment {
     private Context context;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     OkHttpClient client = new OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS).build();
+
     // RecyclerView와 어댑터 객체 생성
     private RecyclerView recyclerView;
     private MyAdapter adapter;
@@ -58,6 +54,7 @@ public class TalkFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_talk, container, false);
         context = container.getContext();
+
         recyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -75,15 +72,16 @@ public class TalkFragment extends Fragment {
 
 
 
-
         adapter = new MyAdapter(itemList);
         recyclerView.setAdapter(adapter);
+
         // give permission to use microphone
         if (getActivity().checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
             getActivity().requestPermissions(new String[]{android.Manifest.permission.RECORD_AUDIO}, 1);
 
         view.findViewById(R.id.temp_btn).setOnClickListener(view1 -> {
-            startRecognition();
+//            startRecognition();
+            callAPI("안녕");
         });
 
         return view;
@@ -105,7 +103,7 @@ public class TalkFragment extends Fragment {
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization","Bearer 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")
+                .header("Authorization","Bearer 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")
                 .post(body)
                 .build();
 
@@ -115,7 +113,7 @@ public class TalkFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.d("callAPI", "Failed to load response due to "+ e.getMessage());
+                Toast.makeText(context,"Failed to load response due to "+ e.getMessage() , Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -127,17 +125,13 @@ public class TalkFragment extends Fragment {
                         jsonObject = new JSONObject(response.body().string());
                         JSONArray jsonArray = jsonObject.getJSONArray("choices");
                         String result = jsonArray.getJSONObject(0).getString("text");
-                        startSynthesis(result.trim());
+                        Toast.makeText(context, "살려줘", Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
                     }
                 }
                 else {
-                    Log.d("callAPI", "Failed to load response due to " + response.body().string());
+                    Toast.makeText(context, "Failed to load response due to " + response.body().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -172,35 +166,6 @@ public class TalkFragment extends Fragment {
 
         // close the reco
         reco.close();
-        callAPI(question + "나는 노인이야");
-    }
-
-    // tts
-    public void startSynthesis(String resultText) throws ExecutionException, InterruptedException {
-        String subscriptionRegion = "koreacentral";
-
-        SpeechConfig config = SpeechConfig.fromSubscription("84e519c9a7a243c9926aae596b677979", subscriptionRegion);
-        config.setSpeechSynthesisVoiceName("ko-KR-GookMinNeural");
-
-        SpeechSynthesizer synthesizer = new SpeechSynthesizer(config);
-        {
-            SpeechSynthesisResult result = synthesizer.SpeakTextAsync(resultText).get();
-            if (result.getReason() == ResultReason.SynthesizingAudioCompleted) {
-                Log.d("startSynthesis", "Speech synthesized to speaker for text [" + resultText + "]");
-            }
-            else if (result.getReason() == ResultReason.Canceled) {
-                SpeechSynthesisCancellationDetails cancellation = SpeechSynthesisCancellationDetails.fromResult(result);
-                Log.d("startSynthesis", "CANCELED: Reason=" + cancellation.getReason());
-
-                if (cancellation.getReason() == CancellationReason.Error) {
-                    Log.d("startSynthesis", "CANCELED: ErrorCode=" + cancellation.getErrorCode());
-                    Log.d("startSynthesis", "CANCELED: ErrorDetails=" + cancellation.getErrorDetails());
-                    Log.d("startSynthesis", "CANCELED: Did you update the subscription info?");
-                }
-            }
-            result.close();
-        }
-        synthesizer.close();
-
+        callAPI(question);
     }
 }
