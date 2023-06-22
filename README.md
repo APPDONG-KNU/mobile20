@@ -33,7 +33,6 @@ open ai key
 
 github actions
 
-key는 저희 팀 개인 키로 하드코딩 되어 있습니다.
 > **여러분의 제품/서비스를 Microsoft 애저 클라우드에 배포하기 위해 사전에 필요한 준비 사항들을 적어주세요.**
 
 ## 시작하기
@@ -44,5 +43,6 @@ key는 저희 팀 개인 키로 하드코딩 되어 있습니다.
 speech_key = "자신의 Azure speech service key 입력"
 openAI_key = "자신의 open ai key 입력"
 ```
-4. 앱을 실행합니다.
+4. `Build > Build Bundle(s) / APK(s) > Build APK(s)`를 통해 `.apk`파일을 생성합니다.
+5. microsoft app center에 올린다.
 > **여러분의 제품/서비스를 Microsoft 애저 클라우드에 배포하기 위한 절차를 구체적으로 나열해 주세요.**
