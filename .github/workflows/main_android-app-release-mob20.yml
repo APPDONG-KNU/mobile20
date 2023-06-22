@@ -34,9 +34,8 @@ jobs:
       - name: App Center
         uses: wzieba/AppCenter-Github-Action@v1.3.3
         with:
-          appName: wzieba/Sample-App
+          appName: wzieba/senior
           token: 24cd6d2affd49505a61b21ce247917e8d344695f
-          group: Testers
           file: app/build/outputs/apk/release/app-release-unsigned.apk
           notifyTesters: true
           debug: false
