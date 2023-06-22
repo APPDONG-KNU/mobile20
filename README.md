@@ -22,27 +22,35 @@
 <!-- 위 링크는 지우지 마세요 -->
 
 ## 설치 방법
-1. 해당 링크에 들어가 `.apk`파일을 설치한다.
-   ( https://appcenter-filemanagement-distrib3ede6f06e.azureedge.net/4ed3eed7-18de-47db-b8d9-4cb1174bc81a/app-debug.apk?sv=2019-02-02&sr=c&sig=4GDguwEi4wpKuT9vxji26%2B1UeQsSrOuuqhpLy7JPq7U%3D&se=2023-06-23T10%3A33%3A52Z&sp=r )
-> **아래 제공하는 설치 방법을 통해 심사위원단이 여러분의 제품/서비스를 실제 Microsoft 애저 클라우드에 배포하고 설치할 수 있어야 합니다. 만약 아래 설치 방법대로 따라해서 배포 및 설치가 되지 않을 경우 본선에 진출할 수 없습니다.**
+1. 아래의 QR코드를 찍어 이동한다.
+   
+![앱 설치 QR코드](https://github.com/hackersground-kr/mobile20/assets/76491242/1b817b53-7f43-459d-8362-81b22fef58ea)
+
+2. `DOWNLOAD`버튼을 눌러 `.apk`파일을 설치한다.
+
+![image](https://github.com/hackersground-kr/mobile20/assets/76491242/485f6eaf-95ee-4f3a-a629-3043b38c83ec)
+
 
 ### 사전 준비 사항
-Azure speech service key
+* Azure speech service key
+   1. Microsoft Azure Portal에서 리소스 그룹을 선택합니다.
+   2. 해당 리소스 그룹에서 `만들기`를 눌러 `음성`을 만듭니다.
+   3. 지역은 `Korea Central`, 이름은 `speech-service-mob20`, 가격 책정 계층은 `Standard S0`으로 설정합니다.
+   4. `검토 + 만들기`를 누르고, 유효성 검사 통과 시 `만들기`를 눌러 배포합니다.
+   5. `리소스로 이동`을 누르고, 아래에서 키 값을 확인합니다.
 
-open ai key
-
-github actions
-
-> **여러분의 제품/서비스를 Microsoft 애저 클라우드에 배포하기 위해 사전에 필요한 준비 사항들을 적어주세요.**
+* OpenAI API key
+   1. OpenAI 홈페이지( https://openai.com/blog/openai-api )에 접속하고, 로그인합니다.
+   2. 우측 상단의 프로필을 클릭하여 `View API keys`를 선택합니다.
+   3. `Create new secret key`을 선택해서 키를 발급 받습니다.
 
 ## 시작하기
 1. 이 레포지토리를 포크합니다.
 2. 안드로이드 스튜디오에서 `File > New > Project From Version Control`을 클릭하여 포크한 레포지토리를 불러옵니다.
-3. `local.properties`에 해당 api 키를 입력하고 try again 버튼을 누른다.
-```
-speech_key = "자신의 Azure speech service key 입력"
-openAI_key = "자신의 open ai key 입력"
-```
+3. `local.properties`에 해당 api 키를 추가하고, 상단의 try again 버튼을 누릅니다.
+   ```
+   speech_key = "자신의 Azure speech service key 입력"
+   openAI_key = "자신의 open ai key 입력"
+   ```
 4. `Build > Build Bundle(s) / APK(s) > Build APK(s)`를 통해 `.apk`파일을 생성합니다.
-5. microsoft app center에 올린다.
-> **여러분의 제품/서비스를 Microsoft 애저 클라우드에 배포하기 위한 절차를 구체적으로 나열해 주세요.**
+5. Visual Studio App Center에 올립니다.
